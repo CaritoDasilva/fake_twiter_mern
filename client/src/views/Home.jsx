@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import { Link } from "react-router-dom";
 const Home = () => {
     const [tweets, setTweets] = useState([]);
 
@@ -22,14 +22,20 @@ const Home = () => {
     return (
         <div>
             <h1>Mis Tweets:</h1>
-            <ul>
-                {
-                    tweets.length > 0 ? (
-                        tweets.map((tweet) => <li key={tweet._id}>{tweet.content}</li>)
-                    ) : 'No ha creado ningún tweet'
-                }
+            <div className="tweets-container">
+                <ul>
+                    {
+                        tweets.length > 0 ? (
+                            tweets.map((tweet) => <li key={tweet._id} className="card">{tweet.content}</li>)
+                        ) : 'No ha creado ningún tweet'
+                    }
 
-            </ul>
+                </ul>
+                <Link to="/new">
+                    <button type="button" class="btn btn-primary">Nuevo Tweet</button>
+                </Link>
+
+            </div>
         </div>
     )
 

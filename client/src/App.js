@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import {
   BrowserRouter as Router,
   Switch,
@@ -6,6 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import Home from './views/Home';
+import NewTweetForm from './views/NewTweet';
 
 function App() {
   return (
@@ -17,17 +18,20 @@ function App() {
             <li>
               <Link to="/">Home</Link>
             </li>
-            {/* <li>
-              <Link to="/about">About</Link>
-            </li>
             <li>
+              <Link to="/new">Nuevo tweet</Link>
+            </li>
+            {/* <li>
               <Link to="/users">Users</Link>
             </li> */}
           </ul>
         </nav>        
         <Switch>         
-          <Route path="/">
+          <Route exact path="/">
             <Home />
+          </Route>
+          <Route exact path="/new">
+            <NewTweetForm/>
           </Route>
         </Switch>
       </div>

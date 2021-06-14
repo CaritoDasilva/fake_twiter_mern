@@ -1,0 +1,35 @@
+.App {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.tweets-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  .card {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    border-radius: 5px;
+    // width: 45%;
+    margin-bottom: 9px;
+    padding: 9px;
+    font-size: 20px;
+  }
+  
+  
+
+  button {
+    width: 250px;
+    margin: 0 auto;
+    font-size: 20px;
+
+  }
+
+}
+
+li {
+    text-decoration: none;
+    list-style: none;
+  }
