@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Home from './views/Home';
 import NewTweetForm from './views/NewTweet';
+import DetailTweet from './views/DetailTweet';
 
 function App() {
   return (
@@ -21,9 +22,9 @@ function App() {
             <li>
               <Link to="/new">Nuevo tweet</Link>
             </li>
-            {/* <li>
-              <Link to="/users">Users</Link>
-            </li> */}
+            <li>
+              <Link to="/details/:id">Ver Tweet</Link>
+            </li>
           </ul>
         </nav>        
         <Switch>         
@@ -32,6 +33,9 @@ function App() {
           </Route>
           <Route exact path="/new">
             <NewTweetForm/>
+          </Route>
+          <Route exact path="/details/:id">
+            <DetailTweet/>
           </Route>
         </Switch>
       </div>

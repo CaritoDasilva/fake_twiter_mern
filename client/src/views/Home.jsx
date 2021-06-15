@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import TweetService from '../services/tweetsService';
 const Home = () => {
     const [tweets, setTweets] = useState([]);
+    const tweetService = new TweetService;
 
     const getAllTweets = async () => {
-        try {
-            const tweetList = await axios.get('http://localhost:8000/api/tweets');
-            setTweets(tweetList.data.tweets);
-            console.log("🚀 ~ file: Home.jsx ~ line 10 ~ getAllTweets ~ tweetList", tweetList)
-
-        } catch (error) {
-            return error;
-        }
+        const tweets = await tweetService.getAllTweets()
+        setTweets(tweets);
     }
 
     useEffect(() => {
@@ -26,7 +22,9 @@ const Home = () => {
                 <ul>
                     {
                         tweets.length > 0 ? (
-                            tweets.map((tweet) => <li key={tweet._id} className="card">{tweet.content}</li>)
+                            tweets.map((tweet) => <Link to={`/details/${tweet._id}`}>
+                                <li key={tweet._id} className="card">{tweet.content}</li>
+                            </Link>)
                         ) : 'No ha creado ningún tweet'
                     }
 
