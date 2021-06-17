@@ -19,7 +19,6 @@ export default class TweetService {
             const tweetList = await axios.get('http://localhost:8000/api/tweets');
             console.log("🚀 ~ file: Home.jsx ~ line 10 ~ getAllTweets ~ tweetList", tweetList)
             return tweetList.data.tweets;
-            // setTweets(tweetList.data.tweets);
 
         } catch (error) {
             return error;
@@ -30,6 +29,15 @@ export default class TweetService {
         try {
             const updatedTweet = await axios.put(`http://localhost:8000/api/tweets/update/${id}`, tweet)
             return updatedTweet.data.tweet;
+        } catch(err) {
+            return err;
+        }
+    }
+
+    async deleteTweet(id) {
+        try{
+            const deleteTweet = await axios.delete(`http://localhost:8000/api/tweets/delete/${id}`)
+            return deleteTweet.data.response;
         } catch(err) {
             return err;
         }

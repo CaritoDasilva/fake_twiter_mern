@@ -37,6 +37,9 @@ function App() {
           <Route exact path="/details/:id">
             <DetailTweet/>
           </Route>
+          <Route exact path="/new/:id">
+            <NewTweetForm/>
+          </Route>
         </Switch>
       </div>
     </Router>

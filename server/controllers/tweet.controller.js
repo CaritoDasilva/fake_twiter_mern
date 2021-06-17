@@ -23,3 +23,9 @@ module.exports.updateTweet = (req, res) => {
     .then(updatedTweet => res.json({tweet: updatedTweet}))
     .catch(err => res.status(404).json(err));
 }
+
+module.exports.deleteTweet = (req, res) => {
+    Tweet.deleteOne({_id: req.params.id})
+    .then(response => res.json({response: response}))
+    .catch(err => res.json(err))
+}

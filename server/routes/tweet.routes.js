@@ -5,4 +5,5 @@ module.exports = app => {
     app.put('/api/tweets/update/:id', TweetController.updateTweet);
     app.get('/api/tweets/:id', TweetController.getOneSingleTweet);
     app.post('/api/tweets/new', TweetController.creatNewTweet);
+    app.delete('/api/tweets/delete/:id', TweetController.deleteTweet);
 }
