@@ -43,6 +43,26 @@ export default class TweetService {
         }
     }
 
+    async registerUser(user) {
+        try {
+            const response = await axios.post('http://localhost:8000/api/users/new', user);
+            return response.data.user;
+
+        } catch(err) {
+            return err;
+        }
+    }
+
+    async loginUser(user) {
+        try {
+            const response = await axios.post('http://localhost:8000/api/users/login', user);
+            return response.data.user;
+
+        } catch(err) {
+            return err;
+        }
+    }
+
 
 
 };

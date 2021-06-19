@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 const DetailTweet = () => {
 
     const { id } = useParams()
-    const tweetService = new TweetService;
+    const tweetService = new TweetService();
     const [tweet, setTweet] = useState({});
     const history = useHistory();
 

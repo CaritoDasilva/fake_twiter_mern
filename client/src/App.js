@@ -8,6 +8,7 @@ import {
 import Home from './views/Home';
 import NewTweetForm from './views/NewTweet';
 import DetailTweet from './views/DetailTweet';
+import Login from './views/Login';
 
 function App() {
   return (
@@ -25,6 +26,9 @@ function App() {
             <li>
               <Link to="/details/:id">Ver Tweet</Link>
             </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
           </ul>
         </nav>        
         <Switch>         
@@ -39,6 +43,9 @@ function App() {
           </Route>
           <Route exact path="/new/:id">
             <NewTweetForm/>
+          </Route>
+          <Route exact path="/login">
+            <Login/>
           </Route>
         </Switch>
       </div>
