@@ -1,5 +1,6 @@
 const User = require('../models/user.model');
 const jwt = require("jsonwebtoken");
+const bcrypt = require('bcrypt');
 
 module.exports.registerUser = (req, res) => {
     console.log("🚀 ~ file: user.controller.js ~ line 5 ~ req.body", req.body)
@@ -10,7 +11,8 @@ module.exports.registerUser = (req, res) => {
 
 module.exports.loginUser = (req, res) => {
     //Primero buscar usuario por email
-    User.findOne({ email: req.body.email })
+
+    User.findOneAndUpdate({ email: req.body.email }, {isOnline: true}, {new: true})
     .then(user => {
       if (user === null) {
         res.json({ msg: "Usuario no existe" });
@@ -19,13 +21,15 @@ module.exports.loginUser = (req, res) => {
         bcrypt
           .compare(req.body.password, user.password)
           .then(passwordIsValid => {
+          console.log("🚀 ~ file: user.controller.js ~ line 23 ~ passwordIsValid", passwordIsValid)
             if (passwordIsValid) {
                 //Si la contraseña es válida genera el token
               const newJWT = jwt.sign({
                     _id: user._id
-              })
+              }, process.env.SECRET_KEY)
+              console.log("🚀 ~ file: user.controller.js ~ line 29 ~ newJWT", process.env.SECRET_KEY)
               //Envía el token através de la cookie del response
-              res
+              return res
                 .cookie("usertoken", newJWT, process.env.SECRET_KEY, {
                   httpOnly: true
                 })
@@ -34,8 +38,21 @@ module.exports.loginUser = (req, res) => {
               res.json({ msg: "Ups! Algo ha fallado en el login" });
             }
           })
-          .catch(err => res.json({ msg: "Ups! Algo ha fallado en el login" }));
+          .catch(err => {
+          console.log("🚀 ~ file: user.controller.js ~ line 41 ~ err", err)
+            return res.json({ msg: "Ups! Algo ha fallado en el login" })
+          });
       }
     })
     .catch(err => res.json(err));
+}
+
+module.exports.logout = (req, res) => {
+  User.findOneAndUpdate({ email: req.body.email }, {isOnline: false}, {new: true})
+  .then(response => {
+    res.clearCookie('usertoken');
+    res.sendStatus(200).json(response);
+  })
+  .catch(err => res.json(err))
+
 }
